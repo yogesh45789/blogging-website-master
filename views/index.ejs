@@ -1,0 +1,139 @@
+<%- include('./partials/header.ejs') -%>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#000000" />
+<meta name="description"
+    content="Anonymous Blogger provides you information about Tech, Non-Tech, General Knowledge, Astronomy and Many more..." />
+<meta property="og:type" content="Blogging website">
+<link rel="icon" type="image/png" href="../public/images/favicon.ico">
+<meta property="og:title" content="Anonymous Blogger💻🤓">
+<meta property="og:description"
+    content="Anonymous Blogger provides you information about Tech, Non-Tech, General Knowledge, Astronomy and Many more...">
+<meta name="keywords"
+    content="Best Blogging Site, Best Blogs, Anonymous Blogger, Best Anonymus Blogs, Tech, Non-Tech, General Knowledge, Astronomy">
+<meta property="og:image" content="../public/images/AB.png" />
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="Anonymous Blogger 💻🤓">
+<meta property="twitter:description"
+    content="Anonymous Blogger provides you information about Tech, Non-Tech, General Knowledge, Astronomy and Many more...">
+<meta property="twitter:image" content="../public/images/AB.png" />
+<title>Anonymous Blogger 💻🤓</title>
+</head>
+
+<body>
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <h1 class="logo me-auto"><a href="/">AnonymousBlogger💻🤓<span>.</span></a></h1>
+        </div>
+    </header>
+    <main id="main">
+
+        <section id="blog" class="blog">
+            
+            <div class="container" data-aos="fade-up">
+                <% if(blogs.length<1){%>
+                    <div style="margin-left:25px">
+                        <a href="blogs/new"> <input class="footer-newsletter btn btn-success " type="submit" value="➕ New Post">
+                            </a>
+                    </div>
+
+                <p class="text-black">No posts yet, create a new one</p>
+
+                <%  } %>
+
+                <div class="row">
+
+                    <div class="col-lg-8 entries">
+
+                        <% blogs.forEach(blog=>{ %>
+                      
+                        <p style="display:none; position:absolute" id="blogId"><%= blog.id  %> </p>
+                          <!-- <a href="blogs/edit/<%= blog.id %> " >
+                                <input class="footer-newsletter btn btn-success " type="submit" value="🛠 Edit Post">
+                        </a> -->
+                        <article class="entry">
+                            <div class="entry-img">
+                                <img src="/uploads/images/<%= blog.img %>" alt="<%= blog.title %>" width="600"
+                                    height="400" class="responsive img-fluid">
+                            </div>
+
+                            <h2 class="entry-title">
+                                <a href="blogs/<%=blog.slug %>"><%= blog.title %></a>
+                            </h2>
+                            <div style="cursor: pointer;">
+                                <div style="display:flex; margin-bottom:15px">
+                                    <a href="blogs/edit/<%= blog.id %> " >
+                                        <input class="footer-newsletter btn btn-success " type="submit" value="🛠 Edit Post">
+                                    </a>
+                                    <form style="margin-left:15px" action="/blogs/<%=blog.id%>?_method=DELETE" method="POST">
+                                            <input class="footer-newsletter btn btn-danger " type="submit" value="❌ Delete Post">
+
+                                    </form>
+
+                                </div>
+                            </div>
+                            <div class="entry-meta">
+                                <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
+                                            href="blogs/<%=blog.slug %>"><%= blog.author%></a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
+                                            href="blogs/<%=blog.slug %>"><time
+                                                datetime="2020-01-01"><%= blog.timeCreated.toLocaleDateString() %></time></a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div class="entry-content">
+
+                                <p>
+                                    <%= blog.description.replace(/<[^>]+>/g, ' ').slice(0,105).concat('...')%>
+                                </p>
+
+                                <div class="read-more">
+                                    <a href="blogs/<%=blog.slug %>">Read More</a>
+                                </div>
+                            </div>
+
+                        </article>
+                        <% }) %>
+
+                    </div>
+                    <div class="col-lg-4">
+
+                        <div class="sidebar">
+
+
+                            <h3 class="sidebar-title">Recent Posts</h3>
+                            <div class="sidebar-item recent-posts">
+                                <% blogs.forEach(blog=>{ %>
+                                <div class="post-item clearfix">
+                                    <img src="/uploads/images/<%= blog.img %>" alt="<%= blog.title %>">
+                                    <h4><a href="blogs/<%=blog.slug %>"><%= blog.title %></a></h4>
+                                    <time datetime="2020-01-01"><%= blog.timeCreated.toLocaleDateString() %></time>
+                                </div>
+
+                                <% }) %>
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- End blog sidebar -->
+
+        </section>
+
+
+    </main>
+    <%- include('./partials/footer.ejs') -%>

@@ -1,0 +1,133 @@
+<%- include ('./partials/header.ejs') -%>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="<%= blog.metaDescription.replace(/<[^>]+>/g, '') %>" />
+    <meta property="og:type" content="Blogging website">
+    <link rel="icon" type="image/png" href="../public/images/favicon.ico">
+    <meta name="keywords" content="<%= blog.metaKeywords %> ">
+    
+    <meta property="og:title" content="<%= blog.title %>">
+    <meta property="og:description"
+      content="<%= blog.metaDescription.replace(/<[^>]+>/g, '') %>">
+    <meta name="author" content="<%= blog.author %>"/>
+    <meta property="og:image" content="/uploads/images/<%= blog.img %>"/>
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="<%= blog.title %>">
+    <meta property="twitter:description"
+      content="<%= blog.metaDescription.replace(/<[^>]+>/g, '') %>">
+    <meta property="twitter:image" content="/uploads/images/<%= blog.img %>" />
+
+    <title> <%= blog.title %> </title>
+</head>
+
+<body>
+  
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="/">Anonymous Blogger 💻🤓<span>.</span></a></h1>
+    </div>
+</header>
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+        <div class="col-2 mt-2 mb-5">
+
+          <a href="/" class="rounded-pill shadow p-2  d-flex align-items-center justify-content-center"
+            style="text-decoration:none;margin-top:100px"><span class="pr-0" style="color:black">Back</span>
+          </a>
+        </div>
+        <h2><%= blog.title %> </h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Single Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-9 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img src="<%= blog.img %>" alt="<%= blog.title %>" class="img-fluid">
+                <!-- //cloudinary image upload -->
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blogs/<%=blog.slug %>"><%= blog.title %></a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a ><%= blog.author%></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a ><time datetime="2020-01-01"><%= blog.timeCreated.toLocaleDateString() %></time></a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content" style="text-align: justify;">
+              <p>
+
+                <%- blog.description %>
+              </p>
+              </div>
+              
+
+              <div class="mb-2 mt-1 p-0 col-md-4 ">
+                
+                <!-- <button style="border:none; background:transparent" id="<%=blog.id%> myButton">Click Me<i class="bi bi-heart">  </i><i>Likes</i></button> -->
+                <ul class="cats">
+                </ul>
+              </div>
+              <div class="entry-footer">
+                <i class="bi bi-tags"></i>
+                <ul class="tags">
+                  <li><a><%= blog.tags %> </a></li>
+                </ul>
+              </div>
+
+            </article><!-- End blog entry -->
+
+            <div class="blog-author d-flex align-items-center">
+              <!-- <img src="<%# blog.authorImg%> " class="rounded-circle float-left" alt=""> -->
+              <div>
+                <h4><%= blog.author  %> </h4>
+                <div class="social-links">
+                  <a target="_blank" href="https://twitter.com/<%=blog.twitter%> "><i class="bi bi-twitter"></i></a>
+                  <a target="_blank" href="<%=blog.website %>"><i class="bi bi-globe"></i></a>
+                  <a target="_blank" href="https://instagram.com/<%=blog.instagram%>"><i class="biu bi-instagram"></i></a>
+                </div>
+                <p>
+                  <%= blog.aboutAuthor.replace(/<[^>]+>/g, '') %>
+                  <!-- About Author -->
+                </p>
+              </div>
+            </div><!-- End blog author bio -->
+            <script
+              src="https://utteranc.es/client.js"
+              repo="Yashkapure06/Blogging-Website"
+              issue-term="pathname"
+              label="Add Your Comments"
+              theme="github-light"
+              crossorigin="anonymous"
+              async>
+            </script>
+
+          </div><!-- End blog entries list -->
+
+          
+
+            
+        </div>
+
+      </div>
+    </section><!-- End Blog Single Section -->
+
+  </main>
+  <%- include ('./partials/footer.ejs') -%>
