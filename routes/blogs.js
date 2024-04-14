@@ -9,7 +9,7 @@ const multer = require('multer');
 // Blog.findOneAndUpdate({_id :id}, {$inc : {'blog.likeCount' : 1}}).exec();
 
 // Lets define Storage for storing the uploaded images 
-
+// some fixes on git hub 
 const storage = multer.diskStorage({
     // to locate destination of a file which is being uploaded
     destination: function(res, file, callback){
